@@ -1,9 +1,6 @@
 package metcarob.com.practice.sol;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 // Represents a deck of cards
 // Standard card deck with one of each card
@@ -39,5 +36,8 @@ public class CardDeck {
 
     public void shuffle() {
         Collections.shuffle(cards);
+    }
+    public void shuffle(long seed) {
+        Collections.shuffle(cards, new Random(seed));
     }
 }

@@ -6,14 +6,24 @@ public class GameBoard {
     CardDeck deck = null;
     CardPile pile = null;
 
+    public GameBoard(long seed) {
+        CardDeck cd = new CardDeck(false);
+        cd.shuffle(seed);
+        construct(cd);
+    }
+
 
     public GameBoard() throws Exception {
-        deck = new CardDeck(false);
-        deck.shuffle();
+        CardDeck cd = new CardDeck(false);
+        cd.shuffle();
+        construct(cd);
+    }
+
+    private void construct(CardDeck cardDeck) {
+        deck = cardDeck;
         mainArea = new GameBoardMainArea(deck);
         homeArea = new CardHome();
         pile = new CardPile(deck);
-
     }
 
     public String toString() {

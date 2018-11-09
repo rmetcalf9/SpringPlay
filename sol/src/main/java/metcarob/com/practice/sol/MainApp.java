@@ -53,6 +53,11 @@ public class MainApp {
             board = new GameBoard();
             return;
         }
+        if (cmd.substring(0,1).equals("N")) {
+            long seed = Long.parseLong(cmd.substring(1));
+            board = new GameBoard(seed);
+            return;
+        }
 
         if (board!=null) {
             if (cmd.equals("W")) {
