@@ -2,8 +2,6 @@ package metcarob.com.practice.sol;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class GameBoardTest {
 
     @Test
@@ -12,5 +10,16 @@ public class GameBoardTest {
 
         System.out.println(board.toString());
         //assertTrue(false);
+    }
+
+    @Test
+    public void takeThreeCardsFromPile() throws Exception {
+        GameBoard board = new GameBoard();
+
+        board.turnCardInPile();
+        board.turnCardInPile();
+        board.turnCardInPile();
+
+        System.out.println(board.toString());
     }
 }

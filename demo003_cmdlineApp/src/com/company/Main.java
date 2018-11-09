@@ -77,11 +77,16 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        /*
         Main path = new Main("/a/b/c/d");
         path.cd("../x");
         System.out.println(path.getPath());
         System.out.println("---");
         path.testZip();
         System.out.println("---");
+        */
+
+        ExamClass001 examClass001 = new ExamClass001();
+        examClass001.entryPoint();
     }
 }

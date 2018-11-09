@@ -1,13 +1,18 @@
 package metcarob.com.practice.sol;
 
 public class Card implements Comparable<Card>{
+    public static enum COLOUR {
+        RED, BLACK, NONE;
+    }
 
     public static enum SUITE {
-        HEARTS("H"),DIAMONDS("D"),CLUBS("C"),SPADES("S"),SPECIAL("_");
+        HEARTS("H", COLOUR.RED),DIAMONDS("D", COLOUR.RED),CLUBS("C", COLOUR.BLACK),SPADES("S", COLOUR.BLACK),SPECIAL("_", COLOUR.NONE);
 
         String let = "";
-        SUITE(String let) {
+        Card.COLOUR col = null;
+        SUITE(String let, Card.COLOUR col) {
             this.let = let;
+            this.col = col;
         }
         public String getLet() {
             return let;
@@ -16,6 +21,10 @@ public class Card implements Comparable<Card>{
         public static SUITE[] normalValues() {
             SUITE[] normalValues = {HEARTS,DIAMONDS,CLUBS,SPADES};
             return normalValues;
+        }
+
+        public Card.COLOUR getColour() {
+            return this.col;
         }
     };
     public static enum CARDVALUE {
@@ -83,10 +92,15 @@ public class Card implements Comparable<Card>{
     }
 
     public String toString() {
-        return String.format("%d of %s",value, suite.name());
+        return String.format("%s of %s",value.toString(), suite.name());
     }
-    public String boardString() {
+
+    public static String boardString(Card.SUITE suite, Card.CARDVALUE value) {
         return String.format("%s%s             ", suite.getLet(), value.getLet()).substring(0,5);
+    }
+
+    public String boardString() {
+        return Card.boardString(this.suite, this.value);
     }
 
     @Override
