@@ -26,6 +26,23 @@ public class MainApp {
 
     }
 
+    //Given a 1 char string return it's col or -1 for invalid
+    private static int getColumn(String s) {
+        int i = -1;
+        try {
+            i = Integer.parseInt(s);
+        } catch (Exception e) {
+            return -1;
+        }
+        if (i>GameBoardMainArea.NUMCOLS) {
+            return -1;
+        }
+        if (i<1) {
+            return -1;
+        }
+        return i;
+    }
+
     private void runCommand(String cmd) throws Exception {
         cmd = cmd.toUpperCase();
         if (cmd.equals("Q")) {
@@ -39,8 +56,11 @@ public class MainApp {
 
         if (board!=null) {
             if (cmd.equals("W")) {
+                board.turnCardInPile(); //Not working
+                return;
+            }
+            if (cmd.equals("T")) {
                 board.turnCardInPile();
-                ;
                 return;
             }
             if (cmd.length()==2) {
@@ -56,18 +76,8 @@ public class MainApp {
                     return;
                 }
                 if (cmd.substring(0,1).equals("P")) {
-                    int colToMoveTo = 0;
-                    try {
-                        colToMoveTo = Integer.parseInt(cmd.substring(1, 2));
-                    } catch (Exception e) {
-                        say("Invalid Column");
-                        return;
-                    }
-                    if (colToMoveTo>GameBoardMainArea.NUMCOLS) {
-                        say("Invalid Column");
-                        return;
-                    }
-                    if (colToMoveTo<1) {
+                    int colToMoveTo = MainApp.getColumn(cmd.substring(1, 2));
+                    if (colToMoveTo == -1) {
                         say("Invalid Column");
                         return;
                     }
@@ -81,6 +91,18 @@ public class MainApp {
                     }
                     return;
                 }
+                if (cmd.substring(1,2).equals("H")) {
+                    int colToMoveFrom = MainApp.getColumn(cmd.substring(0, 1));
+                    if (colToMoveFrom == -1) {
+                        say("Invalid Column");
+                        return;
+                    }
+                    if (!board.moveCardFromColToHome(colToMoveFrom-1)) {
+                        say("Invalid move");
+                        return;
+                    }
+                    return;
+                }
             }
         }
         say("Unrecognised command");
@@ -88,6 +110,8 @@ public class MainApp {
         say( "w = turn");
         say( "p1-7 = move card from pile to col 1-7");
         say( "ph = move card from pile to home");
+        say( "1-7h = move card from col 1-7 to home");
+        say( "t = turn cards over (if possible)");
         say( "q = quit");
     }
 

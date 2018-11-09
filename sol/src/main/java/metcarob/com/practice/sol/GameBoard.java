@@ -54,4 +54,12 @@ public class GameBoard {
         homeArea.placeCard(pile.takeCard());
         return true;
     }
+
+    public boolean moveCardFromColToHome(int zeroBasedColumnNumber) throws Exception {
+        Card cardToMove = mainArea.bottomCardInCol(zeroBasedColumnNumber);
+        if (cardToMove==null) return false;
+        if (!homeArea.canPlaceCard(cardToMove)) return false;
+        homeArea.placeCard(mainArea.takeBottomCardInCol(zeroBasedColumnNumber));
+        return true;
+    }
 }

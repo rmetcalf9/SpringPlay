@@ -93,4 +93,10 @@ public class GameBoardMainArea {
         return col.get(col.size()-1).getCard();
     }
 
+    public Card takeBottomCardInCol(int zeroBasedColumnNumber) {
+        List<GameBoardSlot> col = cols.get(zeroBasedColumnNumber);
+        Card c = this.bottomCardInCol(zeroBasedColumnNumber);
+        col.remove(col.size()-1);
+        return c;
+    }
 }
