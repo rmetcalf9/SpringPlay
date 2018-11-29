@@ -16,7 +16,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class ShoppingBasketRestController {
 
     @RequestMapping(value="/shoppingBasket", method= RequestMethod.POST)
-    public ResponseEntity<ShoppingBasket> postShoppingBasket(@RequestBody ShoppingBasket basket) {
+    public ResponseEntity<ShoppingBasketWithDiscountCaculated> postShoppingBasket(@RequestBody ShoppingBasket basket) throws Exception {
         /*
         List<ShoppingBasketItem> items = new ArrayList<ShoppingBasketItem>();
 
@@ -25,6 +25,6 @@ public class ShoppingBasketRestController {
 
         ShoppingBasket basket = new ShoppingBasket(items);
         */
-        return new ResponseEntity<ShoppingBasket>(basket, HttpStatus.OK);
+        return new ResponseEntity<ShoppingBasketWithDiscountCaculated>(new ShoppingBasketWithDiscountCaculated(basket), HttpStatus.OK);
     }
 }

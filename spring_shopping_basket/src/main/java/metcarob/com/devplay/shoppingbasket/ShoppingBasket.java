@@ -16,7 +16,7 @@ public class ShoppingBasket {
     }
 
     public List<ShoppingBasketItem> getItems() {
-        return items;
+        return new ArrayList<ShoppingBasketItem>(items);
     }
 
     public void setItems(List<ShoppingBasketItem> items) {
