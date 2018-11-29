@@ -10,4 +10,16 @@ public class ShoppingBasket {
     public ShoppingBasket(List<ShoppingBasketItem> items) {
         this.items = new ArrayList<ShoppingBasketItem>(items);
     }
+
+    public ShoppingBasket() {
+        this.items = new ArrayList<ShoppingBasketItem>();
+    }
+
+    public List<ShoppingBasketItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ShoppingBasketItem> items) {
+        this.items = items;
+    }
 }

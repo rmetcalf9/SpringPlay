@@ -9,11 +9,22 @@ public class CurrencyAmount {
         this.amount = amount;
     }
 
+    public CurrencyAmount() {
+    }
+
     public String getCurrenctCode() {
         return currenctCode;
     }
 
     public long getAmount() {
         return amount;
+    }
+
+    public void setCurrenctCode(String currenctCode) {
+        this.currenctCode = currenctCode;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 }
