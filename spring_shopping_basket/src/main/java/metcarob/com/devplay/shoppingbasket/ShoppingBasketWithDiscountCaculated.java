@@ -11,7 +11,7 @@ public class ShoppingBasketWithDiscountCaculated extends ShoppingBasket {
     ShoppingBasketTotals totals = null;
 
 
-    public ShoppingBasketWithDiscountCaculated(ShoppingBasket basket) throws Exception {
+    public ShoppingBasketWithDiscountCaculated(ShoppingBasket basket, ShoppingBasketRestController context) throws Exception {
         this.setItems(basket.getItems());
 
         String expectedCurrency = "GBP";
@@ -24,7 +24,7 @@ public class ShoppingBasketWithDiscountCaculated extends ShoppingBasket {
         }
 
         totals = new ShoppingBasketTotals(10, new CurrencyAmount("USD", totalAmountInInputCurrency));
-        priceExpiry = new Date();
+        priceExpiry = context.getDateFactory().getCurrentDate();
     }
 
     public Date getPriceExpiry() {
