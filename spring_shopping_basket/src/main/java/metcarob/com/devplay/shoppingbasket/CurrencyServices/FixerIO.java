@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /*
 Fixer IO currency exchange provider
@@ -53,6 +56,31 @@ public class FixerIO implements CurrencyRateSource {
         if (!idNode.asBoolean()) {
             throw new Exception(response.getBody());
         }
+        RateList rl = new RateList();
+        idNode = rootNode.path("base");
+        rl.setBaseCurrencyCode(idNode.asText());
+
+        JsonNode rates = rootNode.path("rates");
+        if (null == rates) throw new Exception("Missing rates in response");
+
+        List<Rate> ratesL = new ArrayList<Rate>();
+        Iterator<Map.Entry<String, JsonNode>> i = rates.fields();
+        while (i.hasNext()) {
+            Map.Entry e = i.next();
+            JsonNode n = (JsonNode) e.getValue();
+            Rate r = new Rate();
+            r.setCurrency((String) e.getKey());
+            r.setAmount(n.asLong());
+
+            ratesL.add(r);
+        }
+        rl.setRates(ratesL);
+
+
+
+        System.out.println(response.getBody());
+
+        System.out.println(rl.displayString());
 
         /*
         System.out.println("id = "+idNode.asBoolean());
@@ -66,7 +94,6 @@ public class FixerIO implements CurrencyRateSource {
 
         System.out.println(response.getBody());
         */
-        RateList rl = new RateList();
         return rl;
     }
 }
